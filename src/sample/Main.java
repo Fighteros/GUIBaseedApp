@@ -1,40 +1,39 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
-        Pane pane = new Pane();
-        pane.setPadding(new Insets(5, 5, 5, 5));
-        Text txt = new Text(20, 20, "programming is fun!");
-        txt.setFont(Font.font("Courier", FontWeight.BOLD, FontPosture.ITALIC, 15));
-        pane.getChildren().add(txt);
-
-        Text txt0 = new Text(60, 60, "Programming is Fun\n DisplayTexy");
-        pane.getChildren().add(txt0);
-        Text txt1 = new Text(10, 100, "Programming is Fun\n DisplayTexy");
-        txt1.setFill(Color.RED);
-        txt1.setUnderline(true);
-        txt1.setStrikethrough(true);
-        pane.getChildren().add(txt1);
-
-        primaryStage.setTitle("ShowText");
-        primaryStage.setScene(new Scene(pane));
+        Scene scn = new Scene(new LinePane());
+        primaryStage.setTitle("ShowLine");
+        primaryStage.setScene(scn);
         primaryStage.show();
 
+    }
 
+    class LinePane extends Pane {
+        public LinePane() {
+            Line line0 = new Line(10, 10, 10, 10);
+            line0.endXProperty().bind(widthProperty().subtract(10));
+            line0.endYProperty().bind(heightProperty().subtract(10));
+            line0.setStrokeWidth(5);
+            line0.setStroke(Color.GREEN);
+            getChildren().add(line0);
 
+            Line line1 = new Line(10, 10, 10, 10);
+            line1.startXProperty().bind(widthProperty().subtract(10));
+            line1.endYProperty().bind(heightProperty().subtract(10));
+            line1.setStrokeWidth(5);
+            line1.setStroke(Color.GREEN);
+            getChildren().add(line1);
+        }
     }
 
     public static void main(String[] args) {
