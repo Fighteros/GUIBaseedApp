@@ -4,36 +4,41 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
-        Scene scn = new Scene(new LinePane());
-        primaryStage.setTitle("ShowLine");
-        primaryStage.setScene(scn);
-        primaryStage.show();
+        Pane pane = new Pane();
+        Rectangle r1 = new Rectangle(25, 10, 60, 30);
+        r1.setStroke(Color.BLACK);
+        r1.setFill(Color.WHITE);
+        pane.getChildren().add(new Text(10, 27, "r1"));
+        pane.getChildren().add(r1);
+        Rectangle r2 = new Rectangle(25, 50,  60, 30);
+        pane.getChildren().add(new Text(10, 67, "r3"));
+        pane.getChildren().add(r2);
+        Rectangle r3 = new Rectangle(25, 90, 60, 30);
+        r3.setArcWidth(15);
+        r3.setArcHeight(25);
+        pane.getChildren().add(new Text(10, 107, "r3"));
+        pane.getChildren().add(r3);
 
-    }
-
-    class LinePane extends Pane {
-        public LinePane() {
-            Line line0 = new Line(10, 10, 10, 10);
-            line0.endXProperty().bind(widthProperty().subtract(10));
-            line0.endYProperty().bind(heightProperty().subtract(10));
-            line0.setStrokeWidth(5);
-            line0.setStroke(Color.GREEN);
-            getChildren().add(line0);
-
-            Line line1 = new Line(10, 10, 10, 10);
-            line1.startXProperty().bind(widthProperty().subtract(10));
-            line1.endYProperty().bind(heightProperty().subtract(10));
-            line1.setStrokeWidth(5);
-            line1.setStroke(Color.GREEN);
-            getChildren().add(line1);
+        for(int i = 0; i< 4; i++){
+            Rectangle r = new Rectangle(100, 50, 100, 30);
+            r.setRotate(i * 360 / 8);
+            r.setStroke(Color.color(Math.random(), Math.random(), Math.random()));
+            r.setFill(Color.WHITE);
+            pane.getChildren().add(r);
         }
+
+        Scene scene = new Scene(pane, 250, 150);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("ShowRectangle");
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
